@@ -1,0 +1,8 @@
+[package]
+name = "careerdev"
+version = "0.1.0"
+authors = ["stanley"]
+
+[dependencies]
+html5ever = "0.22"
+lazy_static = "1.0"

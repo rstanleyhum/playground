@@ -1,0 +1,9 @@
+[package]
+name = "crown"
+version = "0.1.0"
+authors = ["R. Stanley Hum <r.stanley.hum@gmail.com>"]
+
+[dependencies]
+odbc = "0.9"
+log = "0.4"
+env_logger = "0.5"

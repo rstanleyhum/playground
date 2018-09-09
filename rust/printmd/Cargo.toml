@@ -1,0 +1,6 @@
+[package]
+name = "printmd"
+version = "0.1.0"
+authors = ["R. Stanley Hum <r.stanley.hum@gmail.com>"]
+
+[dependencies]
