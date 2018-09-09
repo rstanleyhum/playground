@@ -1,0 +1,331 @@
+package infoschema
+
+import (
+	"database/sql"
+	"time"
+)
+
+// CheckConstraint holds an entry for the Check_Constraints table
+type CheckConstraint struct {
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+	CheckClause       string
+}
+
+// ColumnDomainUsage holds an entry for the Column_Domain_Usage table
+type ColumnDomainUsage struct {
+	DomainCatalog string
+	DomainSchema  string
+	DomainName    string
+	TableCatalog  string
+	TableSchema   string
+	TableName     string
+	ColumnName    string
+}
+
+// ColumnPrivilege holds an entry for the Column_Privileges table
+type ColumnPrivilege struct {
+	Grantor       string
+	Grantee       string
+	TableCatalog  string
+	TableSchema   string
+	TableName     string
+	ColumnName    string
+	PrivilegeType string
+	IsGrantable   string
+}
+
+// Column holds an entry for the Columns table
+type Column struct {
+	TableCatalog           string
+	TableSchema            string
+	TableName              string
+	ColumnName             string
+	OrdinalPosition        int
+	ColumnDefault          string
+	IsNullable             string
+	DataType               string
+	CharacterMaximumLength sql.NullInt64
+	CharacterOctetLength   sql.NullInt64
+	NumericPrecision       sql.NullInt64
+	NumericPrecisionRadix  sql.NullInt64
+	NumericScale           sql.NullInt64
+	DateTimePrec           sql.NullInt64
+	CharacterSetCatalog    sql.NullString
+	CharacterSetSchema     sql.NullString
+	CharacterSetName       sql.NullString
+	CollationCatalog       sql.NullString
+	CollationSchema        sql.NullString
+	CollationName          sql.NullString
+	DomainCatalog          sql.NullString
+	DomainSchema           sql.NullString
+	DomainName             sql.NullString
+}
+
+// ConstraintColumnUsage holds an entry for the Constraint_Column_Usage table
+type ConstraintColumnUsage struct {
+	TableCatalog      string
+	TableSchema       string
+	TableName         string
+	ColumnName        string
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+}
+
+// ConstraintTableUsage holds an entry for the Constraint_Table_Usage table
+type ConstraintTableUsage struct {
+	TableCatalog      string
+	TableSchema       string
+	TableName         string
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+}
+
+// DomainConstraint holds an entry for the Domain_Constraints table
+type DomainConstraint struct {
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+	DomainCatalog     string
+	DomainSchema      string
+	DomainName        string
+	IsDeferrable      string
+	InitiallyDeferred string
+}
+
+// Domain holds an entry for the Domains table
+type Domain struct {
+	DomainCatalog          string
+	DomainSchema           string
+	DomainName             string
+	DataType               string
+	CharacterMaximumLength sql.NullInt64
+	CharacterOctetLength   sql.NullInt64
+	CollationCatalog       sql.NullString
+	CollationSchema        sql.NullString
+	CollationName          sql.NullString
+	CharacterSetCatalog    sql.NullString
+	CharacterSetSchema     sql.NullString
+	CharacterSetName       sql.NullString
+	NumericPrecision       sql.NullInt64
+	NumericPrecisionRadix  sql.NullInt64
+	NumericScale           sql.NullInt64
+	DatetimePrecision      sql.NullInt64
+	DomainDefault          string
+}
+
+// KeyColumnUsage holds an entry for the Key_Column_Usage table
+type KeyColumnUsage struct {
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+	TableCatalog      string
+	TableSchema       string
+	TableName         string
+	ColumnName        string
+	OrdinalPosition   int
+}
+
+// Parameter holds an entry for the Parameters table
+type Parameter struct {
+	SpecificCatalog        string
+	SpecificSchema         string
+	SpecificName           string
+	OridinalPosition       int
+	ParameterMode          string
+	IsResult               string
+	AsLocator              string
+	ParameterName          sql.NullString
+	DataType               string
+	CharacterMaximumLength sql.NullInt64
+	CharacterOctetLength   sql.NullInt64
+	CollationCatalog       sql.NullString
+	CollationSchema        sql.NullString
+	CollationName          sql.NullString
+	CharacterSetCatalog    sql.NullString
+	CharacterSetSchema     sql.NullString
+	CharacterSetName       sql.NullString
+	NumericPrecision       sql.NullInt64
+	NumericPrecisionRadix  sql.NullInt64
+	NumericScale           sql.NullInt64
+	DatetimePrecision      sql.NullInt64
+	IntervalType           sql.NullString
+	IntervalPrecision      sql.NullInt64
+	UserDefinedTypeCatalog sql.NullString
+	UserDefinedTypeSchema  sql.NullString
+	UserDefinedTypeName    sql.NullString
+	ScopeCatalog           sql.NullString
+	ScopeSchema            sql.NullString
+	ScopeName              sql.NullString
+}
+
+// ReferentialConstraint holds an entry for the Referential_Constraint table
+type ReferentialConstraint struct {
+	ConstraintCatalog       string
+	ConstraintSchema        string
+	ConstraintName          string
+	UniqueConstraintCatalog string
+	UniqueConstraintSchema  string
+	UniqueConstraintName    string
+	MatchOption             sql.NullString
+	UpdateRule              string
+	DeleteRule              string
+}
+
+// RoutineColumn holds an entry for the Routine_Columns table
+type RoutineColumn struct {
+	TableCatalog           string
+	TableSchema            string
+	TableName              string
+	ColumnName             string
+	OrdinalPosition        int
+	ColumnDefault          string
+	IsNullable             string
+	DataType               string
+	CharacterMaximumLength sql.NullInt64
+	CharacterOctetLength   sql.NullInt64
+	NumericPrecision       sql.NullInt64
+	NumericPrecisionRadix  sql.NullInt64
+	NumericScale           sql.NullInt64
+	DatetimePrecision      sql.NullInt64
+	CharacterSetCatalog    sql.NullString
+	CharacterSetSchema     sql.NullString
+	CharacterSetName       sql.NullString
+	CollationCatalog       sql.NullString
+	CollationSchema        sql.NullString
+	CollationName          sql.NullString
+	DomainCatalog          sql.NullString
+	DomainSchema           sql.NullString
+	DomainName             sql.NullString
+}
+
+// Routine holds an entry for the Routines table
+type Routine struct {
+	SpecificCatalog        string
+	SpecificSchema         string
+	SpecificName           string
+	RoutineCatalog         string
+	RoutineSchema          string
+	RoutineName            string
+	RoutineType            string
+	ModuleCatalog          sql.NullString
+	ModuleSchema           sql.NullString
+	ModuleName             sql.NullString
+	UdtCatalog             sql.NullString
+	UdtSchema              sql.NullString
+	UdtName                sql.NullString
+	DataType               string
+	CharacterMaximumLength int
+	CharacterOctetLength   int
+	CollationCatalog       sql.NullString
+	CollationSchema        sql.NullString
+	CollationName          sql.NullString
+	CharacterSetCatalog    sql.NullString
+	CharacterSetSchema     sql.NullString
+	CharacterSetName       sql.NullString
+	NumericPrecision       sql.NullInt64
+	NumericPrecisionRadix  sql.NullInt64
+	NumericScale           sql.NullInt64
+	DatetimePrecision      sql.NullInt64
+	IntervalType           sql.NullString
+	IntervalPrecision      sql.NullInt64
+	TypeUdtCatalog         sql.NullString
+	TypeUdtSchema          sql.NullString
+	TypeUdtName            sql.NullString
+	ScopeCatalog           sql.NullString
+	ScopeSchema            sql.NullString
+	ScopeName              sql.NullString
+	MaximumCardinality     sql.NullInt64
+	DtdIdentifier          sql.NullString
+	RoutineBody            string
+	RoutineDefinition      sql.NullString
+	ExternalName           sql.NullString
+	ExternalLanguage       sql.NullString
+	ParameterStyle         sql.NullString
+	IsDeterministic        string
+	SQLDataAccess          string
+	IsNullCall             string
+	SQLPath                sql.NullString
+	SchemaLevelRoutine     string
+	MaxDynamicResultsSet   int
+	IsUserDefinedCast      int
+	IsImplicitlyInvocable  string
+	Created                time.Time
+	Altered                time.Time
+}
+
+// Schema holds an entry for the Schemata table
+type Schema struct {
+	CatalogName                string
+	SchemaName                 string
+	SchemaOwner                string
+	DefaultCharacterSetCatalog sql.NullString
+	DefaultCharacterSetSchema  sql.NullString
+	DefaultCharacterSetName    string
+}
+
+// TableConstraint holds an entry for the Table_Constraints table
+type TableConstraint struct {
+	ConstraintCatalog string
+	ConstraintSchema  string
+	ConstraintName    string
+	TableCatalog      string
+	TableSchema       string
+	TableName         string
+	ConstraintType    string
+	IsDeferrable      string
+	InitiallyDeferred string
+}
+
+// TablePrivilege holds an entry for the Table_Privilege table
+type TablePrivilege struct {
+	Grantor       string
+	Grantee       string
+	TableCatalog  string
+	TableSchema   string
+	TableName     string
+	PrivilegeType string
+	IsGrantable   string
+}
+
+// Table holds an entry for the Tables table
+type Table struct {
+	TableCatalog string
+	TableSchema  string
+	TableName    string
+	TableType    string
+}
+
+// ViewColumnUsage holds an entry for the View_Column_Usage table
+type ViewColumnUsage struct {
+	ViewCatalog  string
+	ViewSchema   string
+	ViewName     string
+	TableCatalog string
+	TableSchema  string
+	TableName    string
+	ColumnName   string
+}
+
+// ViewTableUsage holds an entry for the View_Table_Usage table
+type ViewTableUsage struct {
+	ViewCatalog  string
+	ViewSchema   string
+	ViewName     string
+	TableCatalog string
+	TableSchema  string
+	TableName    string
+}
+
+// View holds an entry for the Views table
+type View struct {
+	TableCatalog   string
+	TableSchema    string
+	TableName      string
+	ViewDefinition sql.NullString
+	CheckOption    string
+	IsUpdatable    string
+}
