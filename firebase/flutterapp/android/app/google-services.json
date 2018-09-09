@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "567254085450",
+    "firebase_url": "https://logindemo-5f7b4.firebaseio.com",
+    "project_id": "logindemo-5f7b4",
+    "storage_bucket": "logindemo-5f7b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567254085450:android:16885149ecbb451c",
+        "android_client_info": {
+          "package_name": "com.stanleyhum.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567254085450-hcmpng5lva903cee11mqoj8108cuddba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTOUi5gaPziPtWgc7MK7TSe7l_q-H2DVw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
