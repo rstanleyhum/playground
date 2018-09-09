@@ -1,0 +1,64 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+
+void main() async {
+  final FirebaseApp app = await FirebaseApp.configure(
+    name: 'test',
+    options: new FirebaseOptions(
+      googleAppID: '',
+      projectID: '',
+      apiKey: '',
+    ),
+  );
+  final FirebaseStorage storage = new FirebaseStorage(
+    app: app, storageBucket: 'gs://fluttermdhandbookappservice.appspot.com',
+  );
+  runApp(new MyApp(storage: storage));
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({this.storage});
+  final FirebaseStorage storage;
+
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Baby Names',
+      home: new MyHomePage(title: 'Baby Name Votes', storage: storage),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key key, this.title, this.storage}) : super(key: key);
+
+  final FirebaseStorage storage;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(title: new Text(title)),
+      body: new StreamBuilder(
+          stream: Firestore.instance.collection('baby').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const Text('Loading...');
+            return new ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              padding: const EdgeInsets.only(top: 10.0),
+              itemExtent: 25.0,
+              itemBuilder: (context, index) {
+                DocumentSnapshot ds = snapshot.data.documents[index];
+                return new Text(" ${ds['name']} ${ds['votes']}");
+              }
+            );
+          }),
+    );
+  }
+}

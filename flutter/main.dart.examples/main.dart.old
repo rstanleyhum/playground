@@ -1,0 +1,150 @@
+import 'dart:async' show Future;
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
+        // counter didn't reset back to zero; the application is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => new _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  final images = ['lorazepam-protocol.png',
+                  'methadone-protocol.png',
+                  'suggested-sedation-cardiac-p1.png',
+                  'suggested-sedation-cardiac-p2'];
+
+  String _markdownData = "";
+  String _appDirectory = "";
+  bool _imagesLoaded = false;
+
+  Future<Directory> getAppDocsDir() async {
+    return await getApplicationDocumentsDirectory();
+  }
+  
+  void _loadImages(dir) {
+    if (_imagesLoaded) {
+      return;
+    }
+
+    String imagesDir = dir.path + '/images';
+    new Directory(imagesDir).create(recursive: true)
+      .then((Directory directory) {
+        print(directory.path);
+      });
+    
+    images.forEach((filename) {
+      String assetPath = 'assets/images/' + filename;
+      print(assetPath);
+    });
+
+    setState( () { _imagesLoaded = true; });
+  }
+
+  void _printDirectory(dir) {
+    print(_appDirectory);
+    dir.list(recursive: true, followLinks: false)
+      .listen((FileSystemEntity entity) {
+        print(entity.path);
+      });
+  }
+
+  void _loadAppDirectory() {
+    final futureDir = getAppDocsDir();
+    futureDir.then( (dir) => setState( () { _appDirectory = dir.path; _loadImages(dir); _printDirectory(dir); }) );
+  }
+
+  Future<String> loadAsset(String linkname) async {
+    String path = 'assets/' + linkname;
+    if ((linkname == null) || (linkname == "")) {
+      path = 'assets/chony_picu_main.md';
+    }
+    return await rootBundle.loadString(path);
+  }
+
+  void _initialize() {
+    _loadMarkdown("");
+    _loadAppDirectory();
+  }
+
+  void _loadMarkdown(String linkname) {
+    final futureMD = loadAsset(linkname);
+    futureMD.then( (md) => setState( () { _markdownData = md; }) );
+  }
+
+  void _onTapLink(String href) {
+    if (href.startsWith("http")) {
+      launch(href);
+    }
+
+    if (href.startsWith("hybrid")) {
+      String linkname = href.substring(9) + '.md';
+      _loadMarkdown(linkname);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return new Scaffold(
+      appBar: new AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: new Text(widget.title),
+      ),
+      body: new Markdown(data: _markdownData, onTapLink: _onTapLink),
+
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () => _initialize(),
+        tooltip: 'Reload',
+        child: new Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
